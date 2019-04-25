@@ -1,0 +1,20 @@
+﻿Project Proposal
+1. Team Member Info:
+   * Lewis Lam (KTrinity@csu.fullerton.edu)
+   * Christopher Ly (christopherlanly4@csu.fullerton.edu)
+   * Derrick Lee (derricklee@csu.fullerton.edu)
+2. Overview
+   * Create the popular board game “Mastermind” in C++ using a pre-existing open source library of the game
+3. Goals of Software
+   * To clean and visually upgrade the pre-existing library
+4. Resources
+   * https://github.com/njoosse/mastermind
+   * May Include More Files
+5. Use of Resources
+   * Libraries will be used for the base code, additional visual code will be added and adapted to make it more user friendly
+6. New Features
+   * Plan to add a visual game board along with a game menu and a replayability option, also include a difficulty setting with a timer feature
+7. Current Progress
+   * Lewis: Work on README file
+   * Christopher: Transfer functions into separate header files
+   * Derrick: Add visual game board features

@@ -1,3 +1,5 @@
+#ifndef HINTGENERATOR_H
+#define HINTGENERATOR_H
 /*This function gives both a hint and check how many
   colors you have guessed correctly and how many colors
   you have in the correct position
@@ -122,3 +124,4 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 	//Returns if the player's guess is correct or not
 	return exactlyAlike;
 }
+#endif

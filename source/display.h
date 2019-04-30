@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 void display(string guess) {
-	cout << "Your guess: \n";
+	cout << "\nYour guess: \n";
 	for (int i = 0; i < guess.length(); i++) {
 		char color = guess[i];
 		switch(toupper(color)) 

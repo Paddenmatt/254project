@@ -11,10 +11,15 @@
 #include <ctime>
 #include <chrono>
 #include "colorkit.h"
-#include "visual_display.h"
+#include "display.h"
+#include <ctype.h>
+
 typedef std::chrono::high_resolution_clock Clock;
 typedef std::chrono::_V2::system_clock::time_point globalT;
 using namespace std;
+
+void display(string guess);
+void displaySol(char sol[]);
 
 class timer {
 private:
@@ -40,8 +45,8 @@ bool validGuess (string guess){ //validGuess is a simple function which determin
 	if(guess.length() != 4){//if the player inputted a guess that isn't four characters long, it's already wrong, so reject it
 		return false;
 	}
-	for(int j = 0; j < 4; j++){//if the guess is four letters long, go through it letter by letter and make sure each letter is a r, R, o, O, y, Y, g, G, b, B, p, P
-		if(toupper(guess[j]) != 'R' && toupper(guess[j]) != 'O' && toupper(guess[j]) != 'Y' && toupper(guess[j]) != 'G' && toupper(guess[j]) != 'B' && toupper(guess[j]) != 'P'){
+	for(int j = 0; j < 4; j++){//if the guess is four letters long, go through it letter by letter and make sure each letter is a r, R, w, W, y, Y, g, G, b, B, m, M
+		if(toupper(guess[j]) != 'R' && toupper(guess[j]) != 'W' && toupper(guess[j]) != 'Y' && toupper(guess[j]) != 'G' && toupper(guess[j]) != 'B' && toupper(guess[j]) != 'M'){
 			return false;//if any letter of the guess isn't one of those four, the guess is invalid
 		}
 	}
@@ -69,7 +74,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			if(guess[i] == 'R') {//We also need to keep track of rf the perfectly correct peg's color. This comes into play to provide the second hint
 				numR--;
 			}
-			else if(guess[i]== 'O') {
+			else if(guess[i]== 'W') {
 				numO--;
 			}
 			else if (guess[i] == 'Y') {
@@ -81,7 +86,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			else if (guess[i] == 'B') {
 				numB--;
 			}
-			else if (guess[i] == 'P') {
+			else if (guess[i] == 'M') {
 				numP--;
 			}
 		}
@@ -90,7 +95,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			if(guess[i] == 'R' ){//then, we record that we have an incorrect peg in it's appropriate color variable
 				wrongRedGuessed++;
 			}
-			else if(guess[i]== 'O' ){
+			else if(guess[i]== 'W' ){
 				wrongOrangeGuessed++;
 			}
 			else if (guess[i] == 'Y') {
@@ -102,7 +107,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			else if (guess[i] == 'B') {
 				wrongBlueGuessed++;
 			}
-			else if (guess[i] == 'P') {
+			else if (guess[i] == 'M') {
 				wrongPurpleGuessed++;
 			}
 		}
@@ -196,13 +201,13 @@ int main(){
 
 		if (showTutorial) {
 			cout << "I will generate a random sequence of colored pegs, 4 long." << endl;
-			cout << "Each peg in the sequence is either RED (R), ORANGE (O), YELLOW (Y), GREEN (G), BLUE (B), or PURPLE (P)." << endl;
+			cout << "Each peg in the sequence is either RED (R), ORANGE (W), YELLOW (Y), GREEN (G), BLUE (B), or PURPLE (M)." << endl;
 			cout << "There may or may not be duplicates. " << endl;
 			cout << "You have a certain amount of guesses depending on the difficulty to try and determine this sequence." << endl;
 			cout << "Every time you guess, I'll tell you a bit of information." << endl;
 			cout << "Specifically, I'll tell you how many pegs you have of the right color AND location" << endl;
 			cout << "As well as how many pegs you have that are the right color, but wrong location." << endl;
-			cout << "You'll input your guesses as a sequence of the letters R, O, Y, G, B, P. (ex. RBPY)." << endl;
+			cout << "You'll input your guesses as a sequence of the letters R, W, Y, G, B, M. (ex. RBPY)." << endl;
 			cout << "If you don't guess the sequence within your alloted guesses, I win!" << endl << endl;
 		}//This is the admittedly verbose tutorial
 
@@ -284,7 +289,7 @@ int main(){
 				numRed++;//we also adjust our counter variables accordingly
 			}
 			else if (rand() % 6 == 1) {//generate a random number, then determine if it's odd or even
-				solution[i] = 'O';//using that data, we randomly assign every peg in the solution array to the appropriate color
+				solution[i] = 'W';//using that data, we randomly assign every peg in the solution array to the appropriate color
 				numOrange++;//we also adjust our counter variables accordingly
 			}
 			else if (rand() % 6 == 2) {//generate a random number, then determine if it's odd or even
@@ -300,7 +305,7 @@ int main(){
 				numBlue++;//we also adjust our counter variables accordingly
 			}
 			else {//generate a random number, then determine if it's odd or even
-				solution[i] = 'P';//using that data, we randomly assign every peg in the solution array to the appropriate color
+				solution[i] = 'M';//using that data, we randomly assign every peg in the solution array to the appropriate color
 				numPurple++;//we also adjust our counter variables accordingly
 			}
 		}
@@ -314,15 +319,17 @@ int main(){
 			cout << "Enter a guess: ";//Prompt the user for a guess
 			cin >> guess;
 			while (!validGuess(guess)){//Once we have a guess, we validate it using the validGuess function. If it's not valid, we keep prompting until we get one that is
-				cout << "Invalid input. Please enter a four-character input consisting solely of R, O, Y, G, B, or P" << endl;
+				cout << "Invalid input. Please enter a four-character input consisting solely of R, W, Y, G, B, or M" << endl;
 				cout << "Enter a guess: ";
 				cin >> guess;
 			}
+			display(guess);
 
 			correct = hintGenerator(upperCaseifier(guess), solution, numRed, numOrange, numYellow, numGreen, numBlue, numPurple);//now, take an all-uppercase version of the guess, the codemaker's code, and the total of each colored peg in the code
 			//and run them through hintGenerator to create the hints, and also to determine if the codebreaker has successfully broken the code
 			k++;//increment the iterator for our weird, janky for-loop
 			if(correct){//If they're right, then go ahead and tell them they won
+				displaySol(solution);
 				totalTime = t.elapsedTime();
 				cout << "That's exactly it, you win!" << endl;
 				cout << "You beat Mastermind on ";
@@ -370,6 +377,7 @@ int main(){
 
 		if(!correct){//if we ended up breaking out of the while loop due to running out of guesses, instead of by guessing correctly, print the loss statement
 			if (k >= guesses) {
+				displaySol(solution);
 				cout << "You're all out of guesses! I win!" << endl;
 			}
 			cout << "My code was ";

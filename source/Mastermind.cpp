@@ -53,13 +53,13 @@ int main(){
 
 		if (showTutorial) {
 			cout << "I will generate a random sequence of colored pegs, 4 long." << endl;
-			cout << "Each peg in the sequence is either RED (R), ORANGE (W), YELLOW (Y), GREEN (G), BLUE (B), or PURPLE (M)." << endl;
+			cout << "Each peg in the sequence is either RED (R), WHITE (W), ORANGE (O), GREEN (G), BLUE (B), or PURPLE (P)." << endl;
 			cout << "There may or may not be duplicates. " << endl;
 			cout << "You have a certain amount of guesses depending on the difficulty to try and determine this sequence." << endl;
 			cout << "Every time you guess, I'll tell you a bit of information." << endl;
 			cout << "Specifically, I'll tell you how many pegs you have of the right color AND location" << endl;
 			cout << "As well as how many pegs you have that are the right color, but wrong location." << endl;
-			cout << "You'll input your guesses as a sequence of the letters R, W, Y, G, B, M. (ex. RBPY)." << endl;
+			cout << "You'll input your guesses as a sequence of the letters R, W, Y, G, B, P. (ex. RBPY)." << endl;
 			cout << "If you don't guess the sequence within your alloted guesses, I win!" << endl << endl;
 		}//This is the admittedly verbose tutorial
 
@@ -145,7 +145,7 @@ int main(){
 				numOrange++;//we also adjust our counter variables accordingly
 			}
 			else if (rand() % 6 == 2) {//generate a random number, then determine if it's odd or even
-				solution[i] = 'Y';//using that data, we randomly assign every peg in the solution array to the appropriate color
+				solution[i] = 'O';//using that data, we randomly assign every peg in the solution array to the appropriate color
 				numYellow++;//we also adjust our counter variables accordingly
 			}
 			else if (rand() % 6 == 3) {//generate a random number, then determine if it's odd or even
@@ -157,7 +157,7 @@ int main(){
 				numBlue++;//we also adjust our counter variables accordingly
 			}
 			else {//generate a random number, then determine if it's odd or even
-				solution[i] = 'M';//using that data, we randomly assign every peg in the solution array to the appropriate color
+				solution[i] = 'P';//using that data, we randomly assign every peg in the solution array to the appropriate color
 				numPurple++;//we also adjust our counter variables accordingly
 			}
 		}
@@ -171,7 +171,7 @@ int main(){
 			cout << "Enter a guess: ";//Prompt the user for a guess
 			cin >> guess;
 			while (!validGuess(guess)){//Once we have a guess, we validate it using the validGuess function. If it's not valid, we keep prompting until we get one that is
-				cout << "Invalid input. Please enter a four-character input consisting solely of R, W, Y, G, B, or M" << endl;
+				cout << "Invalid input. Please enter a four-character input consisting solely of R, W, O, G, B, or P" << endl;
 				cout << "Enter a guess: ";
 				cin >> guess;
 			}

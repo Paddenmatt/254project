@@ -1,7 +1,9 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
 #include <iostream>
 #include <string>
-
 using namespace std;
+
 
 //This function displays the colors that the user inputed
 void display(string guess) {
@@ -60,3 +62,4 @@ void displaySol(char sol[]) {
 	}
 	cout<< ansi::RESET << endl << endl;
 }
+#endif

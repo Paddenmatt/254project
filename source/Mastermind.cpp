@@ -46,7 +46,7 @@ bool validGuess (string guess){ //validGuess is a simple function which determin
 		return false;
 	}
 	for(int j = 0; j < 4; j++){//if the guess is four letters long, go through it letter by letter and make sure each letter is a r, R, w, W, y, Y, g, G, b, B, m, M
-		if(toupper(guess[j]) != 'R' && toupper(guess[j]) != 'W' && toupper(guess[j]) != 'Y' && toupper(guess[j]) != 'G' && toupper(guess[j]) != 'B' && toupper(guess[j]) != 'M'){
+		if(toupper(guess[j]) != 'R' && toupper(guess[j]) != 'W' && toupper(guess[j]) != 'O' && toupper(guess[j]) != 'G' && toupper(guess[j]) != 'B' && toupper(guess[j]) != 'P'){
 			return false;//if any letter of the guess isn't one of those four, the guess is invalid
 		}
 	}
@@ -77,7 +77,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			else if(guess[i]== 'W') {
 				numO--;
 			}
-			else if (guess[i] == 'Y') {
+			else if (guess[i] == 'O') {
 				numY--;
 			}
 			else if (guess[i] == 'G') {
@@ -86,7 +86,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			else if (guess[i] == 'B') {
 				numB--;
 			}
-			else if (guess[i] == 'M') {
+			else if (guess[i] == 'P') {
 				numP--;
 			}
 		}
@@ -98,7 +98,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			else if(guess[i]== 'W' ){
 				wrongOrangeGuessed++;
 			}
-			else if (guess[i] == 'Y') {
+			else if (guess[i] == 'O') {
 				wrongYellowGuessed++;
 			}
 			else if (guess[i] == 'G') {
@@ -107,7 +107,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			else if (guess[i] == 'B') {
 				wrongBlueGuessed++;
 			}
-			else if (guess[i] == 'M') {
+			else if (guess[i] == 'P') {
 				wrongPurpleGuessed++;
 			}
 		}
@@ -201,13 +201,13 @@ int main(){
 
 		if (showTutorial) {
 			cout << "I will generate a random sequence of colored pegs, 4 long." << endl;
-			cout << "Each peg in the sequence is either RED (R), ORANGE (W), YELLOW (Y), GREEN (G), BLUE (B), or PURPLE (M)." << endl;
+			cout << "Each peg in the sequence is either RED (R), WHITE (W), ORANGE (O), GREEN (G), BLUE (B), or PURPLE (P)." << endl;
 			cout << "There may or may not be duplicates. " << endl;
 			cout << "You have a certain amount of guesses depending on the difficulty to try and determine this sequence." << endl;
 			cout << "Every time you guess, I'll tell you a bit of information." << endl;
 			cout << "Specifically, I'll tell you how many pegs you have of the right color AND location" << endl;
 			cout << "As well as how many pegs you have that are the right color, but wrong location." << endl;
-			cout << "You'll input your guesses as a sequence of the letters R, W, Y, G, B, M. (ex. RBPY)." << endl;
+			cout << "You'll input your guesses as a sequence of the letters R, W, Y, G, B, P. (ex. RBPY)." << endl;
 			cout << "If you don't guess the sequence within your alloted guesses, I win!" << endl << endl;
 		}//This is the admittedly verbose tutorial
 
@@ -293,7 +293,7 @@ int main(){
 				numOrange++;//we also adjust our counter variables accordingly
 			}
 			else if (rand() % 6 == 2) {//generate a random number, then determine if it's odd or even
-				solution[i] = 'Y';//using that data, we randomly assign every peg in the solution array to the appropriate color
+				solution[i] = 'O';//using that data, we randomly assign every peg in the solution array to the appropriate color
 				numYellow++;//we also adjust our counter variables accordingly
 			}
 			else if (rand() % 6 == 3) {//generate a random number, then determine if it's odd or even
@@ -305,7 +305,7 @@ int main(){
 				numBlue++;//we also adjust our counter variables accordingly
 			}
 			else {//generate a random number, then determine if it's odd or even
-				solution[i] = 'M';//using that data, we randomly assign every peg in the solution array to the appropriate color
+				solution[i] = 'P';//using that data, we randomly assign every peg in the solution array to the appropriate color
 				numPurple++;//we also adjust our counter variables accordingly
 			}
 		}
@@ -319,7 +319,7 @@ int main(){
 			cout << "Enter a guess: ";//Prompt the user for a guess
 			cin >> guess;
 			while (!validGuess(guess)){//Once we have a guess, we validate it using the validGuess function. If it's not valid, we keep prompting until we get one that is
-				cout << "Invalid input. Please enter a four-character input consisting solely of R, W, Y, G, B, or M" << endl;
+				cout << "Invalid input. Please enter a four-character input consisting solely of R, W, O, G, B, or P" << endl;
 				cout << "Enter a guess: ";
 				cin >> guess;
 			}

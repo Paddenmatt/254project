@@ -16,7 +16,7 @@ void display(string guess) {
 			case 'W': cout << ansi::foreground::WHITE << "\u2B24 ";
 					break;
 
-			case 'Y': cout << ansi::foreground::YELLOW << "\u2B24 ";
+			case 'O': cout << ansi::foreground::ORANGE << "\u2B24 ";
 					break;
 
 			case 'G': cout << ansi::foreground::GREEN << "\u2B24 ";
@@ -25,7 +25,7 @@ void display(string guess) {
 			case 'B': cout << ansi::foreground::BLUE << "\u2B24 ";
 					break;
 
-			case 'M': cout << ansi::foreground::MAGENTA << "\u2B24 ";
+			case 'P': cout << ansi::foreground::PURPLE << "\u2B24 ";
 					break;
 		}
 	}
@@ -45,7 +45,7 @@ void displaySol(char sol[]) {
 			case 'W': cout << ansi::foreground::WHITE << "\u2B24 ";
 					break;
 
-			case 'Y': cout << ansi::foreground::YELLOW << "\u2B24 ";
+			case 'O': cout << ansi::foreground::ORANGE << "\u2B24 ";
 					break;
 
 			case 'G': cout << ansi::foreground::GREEN << "\u2B24 ";
@@ -54,7 +54,7 @@ void displaySol(char sol[]) {
 			case 'B': cout << ansi::foreground::BLUE << "\u2B24 ";
 					break;
 
-			case 'M': cout << ansi::foreground::MAGENTA << "\u2B24 ";
+			case 'P': cout << ansi::foreground::PURPLE << "\u2B24 ";
 					break;
 		}
 	}

@@ -1,6 +1,6 @@
 
 
-// use namespaces
+//Colors generated using ansi escape sequences
 namespace ansi {
     const char* RESET = "\e[00m";
     namespace foreground {

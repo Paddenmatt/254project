@@ -1,4 +1,6 @@
 //The purpose of this class is to put a time limit
+#ifndef TIMER_H
+#define TIMER_H
 typedef std::chrono::high_resolution_clock Clock;
 typedef std::chrono::_V2::system_clock::time_point globalT;
 class timer {
@@ -19,3 +21,4 @@ public:
 		return elapsedTime() >= seconds;
 	}
 };
+#endif

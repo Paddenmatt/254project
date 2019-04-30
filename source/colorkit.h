@@ -1,5 +1,5 @@
-
-
+#ifndef COLORKIT_H
+#define COLORKIT_H
 //Colors generated using ansi escape sequences
 namespace ansi {
     const char* RESET = "\e[00m";
@@ -15,4 +15,4 @@ namespace ansi {
         const char* DEFAULT = "\e[39m";
     }
 }
-
+#endif

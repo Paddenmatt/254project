@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
+#include "colorkit.h"
+#include "visual_display.h"
 typedef std::chrono::high_resolution_clock Clock;
 typedef std::chrono::_V2::system_clock::time_point globalT;
 using namespace std;

@@ -1,3 +1,6 @@
+//Purpose of this file is to check to see if the player inserted a valid guess
+#ifndef VALIDGUESS_H
+#define VALIDGUESS_H
 bool validGuess (string guess){
 	//If the player did not insert exactly 4 guesses long, it returns false.
 	if(guess.length() != 4){
@@ -16,3 +19,4 @@ bool validGuess (string guess){
 	return true;
 
 }
+#endif

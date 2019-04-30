@@ -12,16 +12,164 @@
 #include <chrono>
 #include "colorkit.h"
 #include "display.h"
-#include "hintGenerator.h"
-#include "upperCaseifier.h"
-#include "validGuess.h"
-#include "timer.h"
 #include <ctype.h>
 
+typedef std::chrono::high_resolution_clock Clock;
+typedef std::chrono::_V2::system_clock::time_point globalT;
 using namespace std;
 
 void display(string guess);
 void displaySol(char sol[]);
+
+class timer {
+private:
+  globalT tBegin;
+ 	globalT tEnd;
+public:
+	void start() {
+		tBegin = Clock::now();
+	}
+
+	unsigned long elapsedTime() {
+		tEnd = Clock::now();
+		return std::chrono::duration_cast<std::chrono::seconds>(tEnd - tBegin).count();
+	}
+
+	bool isTimeout(unsigned long seconds) {
+		return elapsedTime() >= seconds;
+	}
+};
+
+bool validGuess (string guess){ //validGuess is a simple function which determines if a player's guess is even in the realm of possible answers
+
+	if(guess.length() != 4){//if the player inputted a guess that isn't four characters long, it's already wrong, so reject it
+		return false;
+	}
+	for(int j = 0; j < 4; j++){//if the guess is four letters long, go through it letter by letter and make sure each letter is a r, R, w, W, y, Y, g, G, b, B, m, M
+		if(toupper(guess[j]) != 'R' && toupper(guess[j]) != 'W' && toupper(guess[j]) != 'O' && toupper(guess[j]) != 'G' && toupper(guess[j]) != 'B' && toupper(guess[j]) != 'P'){
+			return false;//if any letter of the guess isn't one of those four, the guess is invalid
+		}
+	}
+
+	return true;//if we pass both of these checks, we have ourselves a valid guess from the player, so let the main method know
+
+}
+
+string upperCaseifier(string s){//really simple function to make every letter of an input string uppercase
+	for(int x = 0; x < s.length(); x++){
+		s[x] = toupper(s[x]);
+	}
+
+	return s;
+}
+
+bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, int numG, int numB, int numP){//hintGenerator both creates the hints that the codebreaker will recieve, and also checks to see if the codebreaker has guessed the code
+	bool exactlyAlike = true;//assume the guess is in fact correct until proven otherwise
+	int rightColorAndPlacement = 0;//and also keep running totals of the number of pegs that are right color/right spot, and those that are right color/wrong spot, for use in the hints
+	int rightColorWrongSpot = 0;
+	int wrongRedGuessed = 0, wrongOrangeGuessed = 0, wrongYellowGuessed = 0, wrongGreenGuessed = 0, wrongBlueGuessed = 0, wrongPurpleGuessed = 0;//these counter variables will track the number of incorrectly-placed pegs, for use in the second hint
+	for(int i = 0; i < 4; i++){//for every letter of the guess
+		if(guess[i] == solution[i]){//check to see if it matches with the corresponding peg in the code. If it does
+			rightColorAndPlacement++;//increment the number of perfectly right pegs by one
+			if(guess[i] == 'R') {//We also need to keep track of rf the perfectly correct peg's color. This comes into play to provide the second hint
+				numR--;
+			}
+			else if(guess[i]== 'W') {
+				numO--;
+			}
+			else if (guess[i] == 'O') {
+				numY--;
+			}
+			else if (guess[i] == 'G') {
+				numG--;
+			}
+			else if (guess[i] == 'B') {
+				numB--;
+			}
+			else if (guess[i] == 'P') {
+				numP--;
+			}
+		}
+		else{//if the peg in the guess and the corresponding peg in the code are not the same
+			exactlyAlike = false;//then we have found a contradiction to the two codes being the same, and change exactlyAlike to reflect that
+			if(guess[i] == 'R' ){//then, we record that we have an incorrect peg in it's appropriate color variable
+				wrongRedGuessed++;
+			}
+			else if(guess[i]== 'W' ){
+				wrongOrangeGuessed++;
+			}
+			else if (guess[i] == 'O') {
+				wrongYellowGuessed++;
+			}
+			else if (guess[i] == 'G') {
+				wrongGreenGuessed++;
+			}
+			else if (guess[i] == 'B') {
+				wrongBlueGuessed++;
+			}
+			else if (guess[i] == 'P') {
+				wrongPurpleGuessed++;
+			}
+		}
+
+
+	}
+
+	/* Now that we've fully iterated over the two codes, we have the exact number of perfect pegs in our player's guess. How, then, do we get the number of pegs which are of the right color, but wrong spot?
+	* Simple. We compare the number of colored pegs remaining unguessed in the code against the number of white and black pegs the player guessed that were not matches.
+	* If the number of incorrect pegs of color X is greater than or equal to the number of pegs of color X remaining in the solution, then we note that all remaining pegs of color X have been identified, if not
+	* properly placed. If the number of incorrect pegs of color X is less than the number of pegs of color X remaining in the solution, we only return the number of pegs of color X that the player managed to
+	* include in their solution.
+	*/
+
+
+	if (wrongRedGuessed >= numR) {
+		rightColorWrongSpot += numR;
+	}
+	else {
+		rightColorWrongSpot += wrongRedGuessed;
+	}
+
+	if (wrongOrangeGuessed >= numO) {
+		rightColorWrongSpot += numO;
+	}
+	else {
+		rightColorWrongSpot += wrongOrangeGuessed;
+	}
+
+	if (wrongYellowGuessed >= numY) {
+		rightColorWrongSpot += numY;
+	}
+	else {
+		rightColorWrongSpot += wrongYellowGuessed;
+	}
+
+	if (wrongGreenGuessed >= numG) {
+		rightColorWrongSpot += numG;
+	}
+	else {
+		rightColorWrongSpot += wrongGreenGuessed;
+	}
+
+	if (wrongBlueGuessed >= numB) {
+		rightColorWrongSpot += numB;
+	}
+	else {
+		rightColorWrongSpot += wrongBlueGuessed;
+	}
+
+	if (wrongPurpleGuessed >= numP) {
+		rightColorWrongSpot += numP;
+	}
+	else {
+		rightColorWrongSpot += wrongPurpleGuessed;
+	}
+
+	cout << "You have " << rightColorAndPlacement << " pegs of the correct color and position." << endl;//Then we produce our two hints for the player
+	cout << "You have " << rightColorWrongSpot << " pegs that are the right color, but in the wrong position." << endl;
+	return exactlyAlike;//and return whether or not their guess was spot-on
+}
+
 
 int main(){
 	auto t1 = Clock::now();

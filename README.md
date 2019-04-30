@@ -10,7 +10,7 @@ Mastermind is a board game invented in 1970 by Mordecai Meirowitz in which 2 pla
 ## Instructions to Play
 **NOTE: INSTRUCTIONS ARE GIVEN IN GAME AS WELL**
 * The player will choose a specific difficulty level which will determine the number of guesses and if the timer is toggled on or off.
-* The player will choose 4 colors ranging from Red (R), Orange (O), Yellow (Y), Green (G), Blue (B), and Purple (P), with duplicated being allowed.
+* The player will choose 4 colors ranging from Red (R), White(W), Yellow (Y), Green (G), Blue (B), and Magenta(M), with duplicated being allowed.
 * The player will receive information based on their guess, one being how many colors are correct and in the correct spot, and how many colors are correct but in the wrong spot.
 * This cycle will continue until the player runs out of guesses or has broken the code.
 * A high score feature will show the time it took the player to solve the code and how it compares to a high score if there is one.

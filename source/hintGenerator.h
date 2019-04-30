@@ -14,7 +14,7 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 	//This checks every letter of the guess
 	for(int i = 0; i < 4; i++){
 		//Checks to see if it matches the peg that the computer is on. If it is then
-		if(guess[i] == solution[i]){/
+		if(guess[i] == solution[i]){
 			//Increments the number of correct pegs by one
 			rightColorAndPlacement++;
 			//These if and else if statement are to check if you guessed a color

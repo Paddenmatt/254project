@@ -17,6 +17,9 @@
 #include "upperCaseifier.h"
 #include "validGuess.h"
 #include <ctype.h>
+#include <fstream>
+
+
 
 using namespace std;
 void display(string guess);
@@ -32,6 +35,55 @@ int main(){
 	unsigned long totalTime;
 	unsigned long bestTime = -1;
 	unsigned long seconds;
+
+	
+	//save stream for the external file to save the high scores.
+
+	string name = "";
+	string score = "";
+	string temp = "";
+	string Array[10][2];	
+	int count = 0;
+
+
+	//opening stream to intake data
+	ifstream savefile;
+	savefile.open ("save.txt");
+	
+	//storing the current player's
+	string currentPlayer = "";
+	string currentScore = "";
+
+	//reading existing data from file ( AAA score)
+	for(int h = 0; h < 10; h++)
+	{
+		getline(savefile, temp);
+		string tempName = "";
+		string tempScore = "";
+		for(int i = 0; i < 3; i++)
+		{
+			tempName += temp[i];
+		}
+		for(int j = 4; j < 8; j++)
+		{
+			tempScore += temp[j];
+		}
+		Array[count][0] = tempName;
+		Array[count][1] = tempScore;
+
+		cout << Array[count][0] << " " << Array[count][1] << endl;
+		count++;
+	}
+
+	savefile.close();
+
+	// ofstream savefile;
+	// savefile.open ("save.txt");
+	// savefile << "did this overwrite? \n";
+	// savefile.close();
+	
+	
+
 	do {	//I'm using a do-while loop here to contain the game, since I know players will want to play at least once.
 		cout << "Welcome to Mastermind." << endl;
 		string toggleTimer = "";

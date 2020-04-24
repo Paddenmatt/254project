@@ -19,7 +19,7 @@
 #include <ctype.h>
 #include <fstream>
 
-
+// This is a comment
 
 using namespace std;
 void display(string guess);
@@ -36,20 +36,20 @@ int main(){
 	unsigned long bestTime = -1;
 	unsigned long seconds;
 
-	
+
 	//save stream for the external file to save the high scores.
 
 	string name = "";
 	string score = "";
 	string temp = "";
-	string Array[10][2];	
+	string Array[10][2];
 	int count = 0;
 
 
 	//opening stream to intake data
 	ifstream savefile;
 	savefile.open ("save.txt");
-	
+
 	//storing the current player's
 	string currentPlayer = "";
 	string currentScore = "";
@@ -81,8 +81,8 @@ int main(){
 	// savefile.open ("save.txt");
 	// savefile << "did this overwrite? \n";
 	// savefile.close();
-	
-	
+
+
 
 	do {	//I'm using a do-while loop here to contain the game, since I know players will want to play at least once.
 		cout << "Welcome to Mastermind." << endl;

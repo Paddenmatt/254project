@@ -39,7 +39,6 @@ int main(){
 
 
 	//save stream for the external file to save the high scores.
-	string name = "";
 	string score = "";
 
 	//storing the current player's
@@ -50,10 +49,22 @@ int main(){
 
 
 	do {	//I'm using a do-while loop here to contain the game, since I know players will want to play at least once.
-		cout << "Welcome to Mastermind." << endl;
+		cout << "\nWelcome to Mastermind." << endl;
 		string toggleTimer = "";
 		string learn = "";
 		bool showTutorial = false;
+
+
+		string name = "";
+		cout << "\nLet us know who is playing!\n";
+		cout << "Enter your three letter initials (Ex: MJP): ";
+		cin  >> name;
+
+		while (name.size() != 3){
+			cout << "Please make sure your initials have 3 letters: ";
+			cin  >> name;
+		}
+		cout << '\n';
 
 		cout << "Would you like to know how to play Mastermind? (y/n)" << endl;//there's a chance that the player actually has no idea how to play mastermind, so we offer to teach them
 		cin >> learn;
@@ -68,28 +79,34 @@ int main(){
 		}
 
 		if (showTutorial) {
-			cout << "I will generate a random sequence of colored pegs, 4 long." << endl;
-			cout << "Each peg in the sequence is either RED (R), WHITE (W), ORANGE (O), GREEN (G), BLUE (B), or PURPLE (P)." << endl;
-			cout << "There may or may not be duplicates. " << endl;
-			cout << "You have a certain amount of guesses depending on the difficulty to try and determine this sequence." << endl;
-			cout << "Every time you guess, I'll tell you a bit of information." << endl;
-			cout << "Specifically, I'll tell you how many pegs you have of the right color AND location" << endl;
-			cout << "As well as how many pegs you have that are the right color, but wrong location." << endl;
-			cout << "You'll input your guesses as a sequence of the letters R, W, Y, G, B, P. (ex. RBPY)." << endl;
-			cout << "If you don't guess the sequence within your alloted guesses, I win!" << endl << endl;
+			cout << string(109, '=') << '\n';
+			cout << "|" << string(51, ' ') << "Rules" <<  string(51, ' ') << "|" << '\n';
+			cout << string(109, '=') << '\n';
+			cout << "- I will generate a random sequence of colored pegs, 4 long." << endl;
+			cout << "- Each peg in the sequence is either RED (R), WHITE (W), ORANGE (O), GREEN (G), BLUE (B), or PURPLE (P)." << endl;
+			cout << "- There may or may not be duplicates. " << endl;
+			cout << "- You have a certain amount of guesses depending on the difficulty to try and determine this sequence." << endl;
+			cout << "- Every time you guess, I'll tell you a bit of information." << endl;
+			cout << "- Specifically, I'll tell you how many pegs you have of the right color AND location" << endl;
+			cout << "- As well as how many pegs you have that are the right color, but wrong location." << endl;
+			cout << "- You'll input your guesses as a sequence of the letters R, W, Y, G, B, P. (ex. RBPY)." << endl;
+			cout << "- If you don't guess the sequence within your alloted guesses, I win!" << endl;
+			cout << string(109, '=') << '\n';
 		}//This is the admittedly verbose tutorial
 
-		cout << "Please select a difficulty level:" << endl;
+
+		cout << "\nPlease select a difficulty level:" << endl;
 		cout << "1 = Easy. 2 = Medium. 3 = Hard. 4 = Extreme. 5 = Custom. ? = Difficulty Information." << endl;//We greet the player, then prompt them to select a difficulty
 		cin >> choice;
 		while (choice == "?") {
-			cout << "Difficulty Information:" << endl;
-			cout << "===============================================" << endl;
+			cout << string(45, '=') << endl;
+			cout << "|           Difficulty Information          |" << endl;
+			cout << string(45, '=') << endl;
 			cout << "Easy: 12 Guesses, No Timer" << endl;
 			cout << "Medium: 10 Guesses, No Timer" << endl;
 			cout << "Hard: 8 Guesses, No Timer" << endl;
 			cout << "Extreme: 8 Guesses, 1 Minute" << endl;
-			cout << "Custome: Custom Number of Guesses, Custom Timer" << endl << endl;
+			cout << "Custom: Custom Number of Guesses, Custom Timer" << endl << endl;
 			cout << "Please select a difficulty level:" << endl;
 			cout << "1 = Easy. 2 = Medium. 3 = Hard. 4 = Extreme. 5 = Custom. ? = Difficulty Information." << endl;
 			cin >> choice;

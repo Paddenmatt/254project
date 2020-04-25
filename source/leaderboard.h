@@ -15,11 +15,11 @@ void leaderboard(){
 	int count = 0;
 
 	// Structure used for leaderboard header
-	cout << '|' << string (21, '-')              << '|' << '\n';
+	cout << '|' << string (21, '=')              << '|' << '\n';
 	cout << '|' << "     Leaderboard     "       << '|' << '\n';
-	cout << '|' << string (21, '-')              << '|' << '\n';
+	cout << '|' << string (21, '=')              << '|' << '\n';
 	cout << '|' << "   Name   " << "   Score   " << '|' << '\n';
-	cout << '|' << string (21, '-')              << '|' << '\n';
+	cout << '|' << string (21, '=')              << '|' << '\n';
 
 
 	//opening stream to intake data
@@ -45,10 +45,10 @@ void leaderboard(){
 
 		cout << "|   " << setw(10) << left << Array[count][0] << setw(8) << left << Array[count][1] << "|"<< endl;
 		count++;
-		}
+	}
 
 	// Closes bottom of the leaderboard
-	cout << '|' << string (21, '-') << '|' << '\n';
+	cout << '|' << string (21, '=') << '|' << '\n';
 
 
 	savefile.close();

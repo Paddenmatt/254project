@@ -244,9 +244,23 @@ int main(){
 				cout << "BEST TIME: " << bestTime / 60 << ":";
 				bestTime % 60 == 0 ? cout << "00\n" : cout << bestTime % 60 << endl;
 
-				// Score calculation
-				// Base score of 200 * Difficulty Scale * Number of Guesses Left
-				score = (200 * stoi(choice) * (guesses - (k-1) ) );
+				// Score calculation (Easy = x1, Medium = x2, Hard = x4, Extreme = x8)
+				// Base score of 200 * Difficulty Multiplier * Number of Guesses Left
+				if (choice == "1"){	// Easy
+					score = (200 * (guesses - (k-1) ) );
+				}
+				else if (choice == "2"){	// Medium
+					score = (200 * 2 * (guesses - (k-1) ) );
+				}
+				else if (choice == "3"){	// Hard
+					score = (200 * 4 * (guesses - (k-1) ) );
+				}
+				else if (choice == "4"){	// Extreme
+					score = (200 * 8 * (guesses - (k-1) ) );
+				}
+				else	// Custom gets a score of 0
+					score = 0;
+
 				if (score > 9999){
 					cout << "You achieved a score of 9999!\n"; // Dsiplay Max Score
 				}

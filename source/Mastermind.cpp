@@ -39,7 +39,7 @@ int main(){
 
 
 	//save stream for the external file to save the high scores.
-	string score = "";
+	int score = 0;
 
 	//storing the current player's
 	string currentPlayer = "";
@@ -55,14 +55,13 @@ int main(){
 		bool showTutorial = false;
 
 
-		string name = "";
 		cout << "\nLet us know who is playing!\n";
 		cout << "Enter your three letter initials (Ex: MJP): ";
-		cin  >> name;
+		cin  >> currentPlayer;
 
-		while (name.size() != 3){
+		while (currentPlayer.size() != 3){
 			cout << "Please make sure your initials have 3 letters: ";
-			cin  >> name;
+			cin  >> currentPlayer;
 		}
 		cout << '\n';
 
@@ -89,7 +88,7 @@ int main(){
 			cout << "- Every time you guess, I'll tell you a bit of information." << endl;
 			cout << "- Specifically, I'll tell you how many pegs you have of the right color AND location" << endl;
 			cout << "- As well as how many pegs you have that are the right color, but wrong location." << endl;
-			cout << "- You'll input your guesses as a sequence of the letters R, W, Y, G, B, P. (ex. RBPY)." << endl;
+			cout << "- You'll input your guesses as a sequence of the letters R, W, O, G, B, P. (ex. RBPY)." << endl;
 			cout << "- If you don't guess the sequence within your alloted guesses, I win!" << endl;
 			cout << string(109, '=') << '\n';
 		}//This is the admittedly verbose tutorial
@@ -99,14 +98,15 @@ int main(){
 		cout << "1 = Easy. 2 = Medium. 3 = Hard. 4 = Extreme. 5 = Custom. ? = Difficulty Information." << endl;//We greet the player, then prompt them to select a difficulty
 		cin >> choice;
 		while (choice == "?") {
-			cout << string(45, '=') << endl;
-			cout << "|           Difficulty Information          |" << endl;
-			cout << string(45, '=') << endl;
+			cout << string(50, '=') << endl;
+			cout << "|" << string(13, ' ') << "Difficulty Information" << string(13, ' ') <<  "|" << endl;
+			cout << string(50, '=') << endl;
 			cout << "Easy: 12 Guesses, No Timer" << endl;
 			cout << "Medium: 10 Guesses, No Timer" << endl;
 			cout << "Hard: 8 Guesses, No Timer" << endl;
 			cout << "Extreme: 8 Guesses, 1 Minute" << endl;
-			cout << "Custom: Custom Number of Guesses, Custom Timer" << endl << endl;
+			cout << "Custom: Custom Number of Guesses, Custom Timer" << endl;
+			cout << string(50, '=') << endl << endl;
 			cout << "Please select a difficulty level:" << endl;
 			cout << "1 = Easy. 2 = Medium. 3 = Hard. 4 = Extreme. 5 = Custom. ? = Difficulty Information." << endl;
 			cin >> choice;
@@ -241,11 +241,20 @@ int main(){
 					cout << "NEW BEST TIME: " << bestTime / 60 << ":";
 					bestTime % 60 == 0 ? cout << "00\n" : cout << bestTime % 60 << endl;
 				}
-					cout << "BEST TIME: " << bestTime / 60 << ":";
-					bestTime % 60 == 0 ? cout << "00\n" : cout << bestTime % 60 << endl;
+				cout << "BEST TIME: " << bestTime / 60 << ":";
+				bestTime % 60 == 0 ? cout << "00\n" : cout << bestTime % 60 << endl;
 
-
+				// Score calculation
+				// Base score of 200 * Difficulty Scale * Number of Guesses Left
+				score = (200 * stoi(choice) * (guesses - (k-1) ) );
+				if (score > 9999){
+					cout << "You achieved a score of 9999!\n"; // Dsiplay Max Score
+				}
+				else{
+					cout << "You achieved a score of " << score << "!\n";
+				}
 			}
+
 			else{//If they're not right, let them know, and tell them how many guesses they have left
 				cout << "That's not it, sadly!" << endl;
 				if (upperCaseifier(toggleTimer) == "Y") {
@@ -278,6 +287,7 @@ int main(){
 				cout << solution[q];
 			}
 			cout << "!" << endl;
+			cout << "\nSorry your score is 0\n";
 		}
 
 		cout << "Play again? (y/n) "; //Now that the game is complete, prompt the user to see if they want to play again

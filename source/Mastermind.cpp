@@ -17,6 +17,7 @@
 #include "upperCaseifier.h"
 #include "validGuess.h"
 #include "leaderboard.h"
+#include "savingscore.h"
 #include <ctype.h>
 #include <fstream>
 
@@ -45,8 +46,10 @@ int main(){
 	string currentPlayer = "";
 	string currentScore = "";
 
-	leaderboard();	// Displays the leaderboard
 
+	leaderboard();	// Displays the leaderboard
+	
+	
 
 	do {	//I'm using a do-while loop here to contain the game, since I know players will want to play at least once.
 		cout << "\nWelcome to Mastermind." << endl;
@@ -334,6 +337,10 @@ int main(){
 			repeat = false;
 		}//if our player says they don't wanna play anymore, we reverse repeat so we can break our do-while loop. If they do wanna continue, we do nothing, and let the loop...well, loop.
 		cout << endl;
+
 	} while(repeat);
+	savescore(score, currentPlayer);
+
+	leaderboard();
 	return 0;
 }

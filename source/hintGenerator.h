@@ -21,22 +21,22 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			rightColorAndPlacement++;
 			//These if and else if statement are to check if you guessed a color
 			//correctly, but in the wrong place
-			if(guess[i] == 'R') {
+			if(guess[i] == 'R' || guess[i] == 'r') {
 				numR--;
 			}
-			else if(guess[i]== 'W') {
+			else if(guess[i]== 'W' || guess[i] == 'w') {
 				numO--;
 			}
-			else if (guess[i] == 'Y') {
+			else if (guess[i] == 'Y' || guess[i] == 'y') {
 				numY--;
 			}
-			else if (guess[i] == 'G') {
+			else if (guess[i] == 'G' || guess[i] == 'g') {
 				numG--;
 			}
-			else if (guess[i] == 'B') {
+			else if (guess[i] == 'B' || guess[i] == 'b') {
 				numB--;
 			}
-			else if (guess[i] == 'M') {
+			else if (guess[i] == 'M' || guess[i] == 'm') {
 				numP--;
 			}
 		}
@@ -45,22 +45,22 @@ bool hintGenerator(string guess, char* solution, int numR, int numO, int numY, i
 			//We would make exactlyAlike false because we found out that they arent the same.
 			exactlyAlike = false;
 			//We record that we have an incorrect peg in its appropriate color variable
-			if(guess[i] == 'R' ){
+			if(guess[i] == 'R' || guess[i] == 'r'){
 				wrongRedGuessed++;
 			}
-			else if(guess[i]== 'W' ){
+			else if(guess[i]== 'W' || guess[i] == 'w'){
 				wrongOrangeGuessed++;
 			}
-			else if (guess[i] == 'Y') {
+			else if (guess[i] == 'Y' || guess[i] == 'y') {
 				wrongYellowGuessed++;
 			}
-			else if (guess[i] == 'G') {
+			else if (guess[i] == 'G' || guess[i] == 'g') {
 				wrongGreenGuessed++;
 			}
-			else if (guess[i] == 'B') {
+			else if (guess[i] == 'B' || guess[i] == 'b') {
 				wrongBlueGuessed++;
 			}
-			else if (guess[i] == 'M') {
+			else if (guess[i] == 'M' || guess[i] == 'm') {
 				wrongPurpleGuessed++;
 			}
 		}

@@ -61,7 +61,6 @@ void savescore(int score, string currentPlayer) {
 
 				for(int leftover = i-1; leftover >= 0; leftover--)
 				{
-					cout << "HERE2" << endl;
 
 					string temp2user = Array[leftover][0];
 					string temp2score = Array[leftover][1];

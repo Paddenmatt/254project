@@ -338,8 +338,9 @@ int main(){
 		}//if our player says they don't wanna play anymore, we reverse repeat so we can break our do-while loop. If they do wanna continue, we do nothing, and let the loop...well, loop.
 		cout << endl;
 
+		savescore(score, currentPlayer);
 	} while(repeat);
-	savescore(score, currentPlayer);
+	
 
 	leaderboard();
 	return 0;

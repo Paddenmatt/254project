@@ -253,13 +253,13 @@ int main(){
 					score = (200 * (guesses - (k-1) ) );
 				}
 				else if (choice == "2"){	// Medium Difficulty Multiplier of x2
-					score = (200 * 2 * (guesses - (k-1) ) );
+					score = (300 * 2 * (guesses - (k-1) ) );
 				}
 				else if (choice == "3"){	// Hard Difficulty Multiplier of x4
-					score = (200 * 4 * (guesses - (k-1) ) );
+					score = (400 * 4 * (guesses - (k-1) ) );
 				}
 				else if (choice == "4"){	// Extreme Difficulty Multiplier of x8
-					score = (200 * 8 * (guesses - (k-1) ) );
+					score = (500 * 8 * (guesses - (k-1) ) );
 				}
 				else	// Custom gets a score of 0
 					score = 0;

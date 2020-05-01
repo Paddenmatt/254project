@@ -48,8 +48,8 @@ int main(){
 
 
 	leaderboard();	// Displays the leaderboard
-	
-	
+
+
 
 	do {	//I'm using a do-while loop here to contain the game, since I know players will want to play at least once.
 		cout << "\nWelcome to Mastermind." << endl;
@@ -305,23 +305,6 @@ int main(){
 			}
 			cout << "!" << endl;
 			cout << "\nSorry your score is 0\n";
-		}
-
-		// Gives the user an option to display the scoreboard at the end of the game
-		cout << "Would you like to see the scoreboard? (y/n):";
-		string seeScore = "";
-		cin  >> seeScore;
-
-		// Validates the input for checking the leaderboard
-		while(seeScore != "y" && seeScore != "Y" && seeScore != "n" && seeScore != "N"){
-			cout << "Invalid input. Enter either 'y' or 'n': ";
-			cin  >> seeScore;
-		}
-
-		// If the user chooses "y" or "Y" the leaderboard will show up
-		if (seeScore == "y" || seeScore == "Y"){
-			leaderboard();	// Displays the leaderboard
-			cout << '\n';
 		}
 
 		cout << "Play again? (y/n) "; //Now that the game is complete, prompt the user to see if they want to play again

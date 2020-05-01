@@ -55,7 +55,6 @@ void leaderboard(){
 			Array[count][1] = tempScore;
 		}
 
-		
 		cout << "|   " << setw(10) << left << Array[count][0] << setw(8) << left << Array[count][1] << "|"<< endl;
 		count++;
 	}

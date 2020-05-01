@@ -339,9 +339,10 @@ int main(){
 		cout << endl;
 
 		savescore(score, currentPlayer);
+		leaderboard();
 	} while(repeat);
 	
 
-	leaderboard();
+	
 	return 0;
 }

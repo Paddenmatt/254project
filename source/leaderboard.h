@@ -40,8 +40,20 @@ void leaderboard(){
 		{
 			tempScore += temp[j];
 		}
+
+		//reading name to array
 		Array[count][0] = tempName;
-		Array[count][1] = tempScore;
+
+		//reading score to array
+		string add = "0";
+		if(stoi(tempScore) < 1000 && stoi(tempScore) > 0)
+		{
+			Array[count][1] = add.append(tempScore);
+		}
+		else
+		{
+			Array[count][1] = tempScore;
+		}
 
 		cout << "|   " << setw(10) << left << Array[count][0] << setw(8) << left << Array[count][1] << "|"<< endl;
 		count++;
